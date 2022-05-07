@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="normalize.css">
+    <title>Primer trabajo practico</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="title">Simulador de plazo fijo</h1>
+    </header>
+    <main>
+        <div class="user">
+            <label for="">Nombre</label>
+            <input id="nombre" type="text" placeholder="Aca va tu nombre capo">
+            <label id="nombreIncorrecto" class="error">Debe ingresar un nombre</label>
+            <br>
+            <label for="">Apellido</label>
+            <input id="apellido" type="text" placeholder="Aca va tu apellido capo">
+            <label id="apellidoIncorrecto" class="error">Debe ingresar un apellido</label>
+            <br>
+            <label for="">Cantida de dias</label>
+            <select id="dias" name="select">
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option value="90">90</option>
+                <option value="120">120</option>
+                <option value="150">150</option>
+                <option value="180">180</option>
+                <option value="210">210</option>
+                <option value="240">240</option>
+                <option value="270">270</option>
+                <option value="300">300</option>
+                <option value="330">330</option>
+                <option value="360">360</option>
+            </select>
+            <br>
+            <label for="">Monto a invertir</label>
+            <input id="monto" type="number" placeholder="Aca va el monto crack">
+            <label id="montoIncorrecto" class="error">Debe ingresar un monto</label>
+            <div id="reinverir">
+                <input id="invertir" type="button" value="Invertir" onclick="invertir();" />
+                <span class="tool" data-tip="Este boton sirve para invertir el monto inicial más lo ganado"
+                    tabindex="1"><button id="reinvertir" onclick="reinvertir();">Reinvertir</button></span>
+            </div>
+            <h3 id="ganancia"></h3>
+        </div>
+
+        <script src="index.js"></script>
+    </main>
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>
