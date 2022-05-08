@@ -1,8 +1,11 @@
 let montoFinal = 0;
+let monto = 0;
+let cont = 1 ;
 function invertir(){
     let nombre = document.getElementById('nombre').value;
     let apellido = document.getElementById('apellido').value;
-    let monto = document.getElementById('monto').value;
+    monto = document.getElementById('monto').value;
+
     let dias = document.getElementById('dias').value;
     let porcentaje = 0;
     
@@ -60,9 +63,10 @@ function invertir(){
     } else if (dias>=360) {
         porcentaje=65;
     } 
-    montoFinal = monto+monto*dias/364*porcentaje/100;
+    montoFinal = monto+monto*dias/360*porcentaje/100;
     
-    document.getElementById('ganancia').innerHTML = "Su ganancia es de " + montoFinal;
+    let texto = `<p>Periodo 1* Monto INICIAL: ${monto.toFixed(2)} Monto final: ${montoFinal.toFixed(2)}</p> `;
+    document.getElementById('cuadro').innerHTML = texto;
 }
 function reinvertir(){
     let nombre = document.getElementById('nombre').value;
@@ -124,8 +128,11 @@ function reinvertir(){
     } else if (dias>=360) {
         porcentaje=65;
     } 
-    
+    cont++;
     gananciaFinal = montoFinal+montoFinal*dias/360*porcentaje/100;
     montoFinal = gananciaFinal;
-    document.getElementById('ganancia').innerHTML = "Su ganancia es de " + gananciaFinal;
+    let texto = `
+                    <p>Periodo ${cont}* Monto INICIAL: ${monto.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
+    `;
+    document.getElementById('cuadro').innerHTML = texto;
 }

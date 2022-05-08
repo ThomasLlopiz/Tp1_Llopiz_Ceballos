@@ -164,3 +164,11 @@ pre {
    color: red;
    display: none;
 }
+.cuadro{
+   width: 600px;
+   border: 1px solid black;
+}
+.general {
+   text-align: center;
+   margin: 0 auto;
+}
