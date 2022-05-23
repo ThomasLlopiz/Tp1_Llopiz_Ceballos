@@ -1,138 +1,79 @@
 let montoFinal = 0;
-let monto = 0;
+let gananciaFinal = 0;
 let cont = 1 ;
-function invertir(){
-    let nombre = document.getElementById('nombre').value;
-    let apellido = document.getElementById('apellido').value;
-    monto = document.getElementById('monto').value;
-
-    let dias = document.getElementById('dias').value;
-    let porcentaje = 0;
-    
-    //para validar que no haya campos vacios
-    if (nombre == "") {
+let porcentaje = 0;
+let monto = document.getElementById('monto');
+let dias = document.getElementById('dias');
+let apellido =document.getElementById('apellido');
+let nombre =document.getElementById('nombre');
+function invertir(){    
+    validarImputs();
+    validarDias(); 
+    calcularMostrarMonto();
+}
+function validarImputs(){
+    if (nombre.value == "") {
         document.getElementById("nombreIncorrecto").style.display = "block";
-        return;
+        return
     } else {
         document.getElementById("nombreIncorrecto").style.display = "none";
     }
-    if (apellido == "") {
+    if (apellido.value == "") {
         document.getElementById("apellidoIncorrecto").style.display = "block";
         return;
     }else {
         document.getElementById("nombreIncorrecto").style.display = "none";
     }
-    if (monto == "") {
+    if (monto.value == "") {
         document.getElementById("montoIncorrecto").style.display = "block";
         return;
     }else {
         document.getElementById("nombreIncorrecto").style.display = "none";
     }
-    if (dias == "") {
-        document.getElementById("diasIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    dias = parseInt(dias);
-    if (isNaN(dias)) {
-        document.getElementById("diasIncorrecto").style.display = "block";
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    monto = parseFloat(monto);
-    if (isNaN(monto)) {
-        document.getElementById("montoIncorrecto").style.display = "block";
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (monto < 1000) {
+    monto.value = parseFloat(monto.value);
+    if (isNaN(monto.value)) {
         document.getElementById("montoIncorrecto").style.display = "block";
         return;
+    }else {
+        document.getElementById("nombreIncorrecto").style.display = "none";
+    }
+    if (monto.value < 1000) {
+        document.getElementById("montoIncorrecto").style.display = "block";
+        return monto;
     }else {
         document.getElementById("nombreIncorrecto").style.display = "none";
     }
 
-    //para saber cuanto va a ser el porcentaje
-    if (dias>=30 && dias<=60) {
+}
+function validarDias(){
+    if (dias.value>=30 && dias.value<=60) {
         porcentaje=40;
-    } else if (dias>61 && dias<=120) {
+        return porcentaje;
+    } else if (dias.value>61 && dias.value<=120) {
         porcentaje=45;
-    } else if (dias>=121 && dias<360) {
+        return porcentaje;
+    } else if (dias.value>=121 && dias.value<360) {
         porcentaje=50;
-    } else if (dias>=360) {
+        return porcentaje;
+    } else if (dias.value>=360) {
         porcentaje=65;
+        return porcentaje;
     } 
-    montoFinal = monto+monto*dias/360*porcentaje/100;
-    
-    let texto = `<p>Periodo 1* Monto INICIAL: ${monto.toFixed(2)} Monto final: ${montoFinal.toFixed(2)}</p> `;
+}
+function calcularMostrarMonto() {
+    total = monto.value = parseFloat(monto.value);
+    montoFinal = total+total*dias.value/360*porcentaje/100;
+    let texto = `<p>Periodo 1* Monto INICIAL: ${monto.value} Monto final: ${montoFinal.toFixed(2)}</p> `;
     document.getElementById('cuadro').innerHTML = texto;
 }
 function reinvertir(){
-    let nombre = document.getElementById('nombre').value;
-    let apellido = document.getElementById('apellido').value;
-    let monto = document.getElementById('monto').value;
-    let dias = document.getElementById('dias').value;
-    let gananciaFinal = 0;
-    let porcentaje = 0;
-    
-    //para validar que no haya campos vacios
-    if (nombre == "") {
-        document.getElementById("nombreIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (apellido == "") {
-        document.getElementById("apellidoIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (monto == "") {
-        document.getElementById("montoIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (dias == "") {
-        document.getElementById("diasIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    dias = parseInt(dias);
-    if (isNaN(dias)) {
-        document.getElementById("diasIncorrecto").style.display = "block";
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    monto = parseFloat(monto);
-    if (isNaN(monto)) {
-        document.getElementById("montoIncorrecto").style.display = "block";
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (monto < 1000) {
-        document.getElementById("montoIncorrecto").style.display = "block";
-        return;
-    }
-
-    //para saber cuanto va a ser el porcentaje
-    if (dias>=30 && dias<=60) {
-        porcentaje=40;
-    } else if (dias>61 && dias<=120) {
-        porcentaje=45;
-    } else if (dias>=121 && dias<360) {
-        porcentaje=50;
-    } else if (dias>=360) {
-        porcentaje=65;
-    } 
+    validarImputs();
+    validarDias(); 
     cont++;
-    gananciaFinal = montoFinal+montoFinal*dias/360*porcentaje/100;
-    montoFinal = gananciaFinal;
+    gananciaFinal = montoFinal+montoFinal*dias.value/360*porcentaje/100;
     let texto = `
-                    <p>Periodo ${cont}* Monto INICIAL: ${monto.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
+                <p>Periodo ${cont}* Monto INICIAL: ${montoFinal.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
     `;
     document.getElementById('cuadro').innerHTML = texto;
+    montoFinal=gananciaFinal
 }
