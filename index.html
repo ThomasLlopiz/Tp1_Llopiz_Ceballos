@@ -19,15 +19,15 @@
     </header>
     <main>
         <div class="user">
-            <label for="">Nombre</label>
+            <label for="nombre">Nombre</label>
             <input id="nombre" type="text" placeholder="Aca va tu nombre capo">
             <label id="nombreIncorrecto" class="error">Debe ingresar un nombre</label>
             <br>
-            <label for="">Apellido</label>
+            <label for="apellido">Apellido</label>
             <input id="apellido" type="text" placeholder="Aca va tu apellido capo">
             <label id="apellidoIncorrecto" class="error">Debe ingresar un apellido</label>
             <br>
-            <label for="">Cantida de dias</label>
+            <label for="dias">Cantida de dias</label>
             <select id="dias" name="select">
                 <option value="30">30</option>
                 <option value="60">60</option>
@@ -43,9 +43,9 @@
                 <option value="360">360</option>
             </select>
             <br>
-            <label for="">Monto a invertir</label>
+            <label for="monto">Monto a invertir</label>
             <input id="monto" type="number" placeholder="Aca va el monto crack">
-            <label id="montoIncorrecto" class="error">Debe ingresar un monto</label>
+            <label id="montoIncorrecto" class="error">Debe ingresar un monto mayor a 1000</label>
             <div id="reinverir">
                 <input id="invertir" type="button" value="Invertir" onclick="invertir();" />
                 <span class="tool" data-tip="Este boton sirve para invertir el monto inicial más lo ganado"
