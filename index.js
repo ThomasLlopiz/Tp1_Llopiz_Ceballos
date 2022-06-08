@@ -2,46 +2,36 @@ let montoFinal = 0;
 let gananciaFinal = 0;
 let cont = 1 ;
 let porcentaje = 0;
+let total = 0;
 let monto = document.getElementById('monto');
 let dias = document.getElementById('dias');
 let apellido =document.getElementById('apellido');
 let nombre =document.getElementById('nombre');
-function invertir(){    
-    validarImputs();
-    validarDias(); 
-    calcularMostrarMonto();
-}
+
 function validarImputs(){
-    if (nombre.value == "") {
+    if (nombre.value.trim() === "") {
         document.getElementById("nombreIncorrecto").style.display = "block";
-        return
+        return;
     } else {
         document.getElementById("nombreIncorrecto").style.display = "none";
     }
-    if (apellido.value == "") {
+    if (apellido.value === "") {
         document.getElementById("apellidoIncorrecto").style.display = "block";
         return;
     }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
-    }
-    if (monto.value == "") {
-        document.getElementById("montoIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
+        document.getElementById("apellidoIncorrecto").style.display = "none";
     }
     monto.value = parseFloat(monto.value);
     if (isNaN(monto.value)) {
         document.getElementById("montoIncorrecto").style.display = "block";
-        return;
     }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
+        document.getElementById("montoIncorrecto").style.display = "none";
     }
     if (monto.value < 1000) {
         document.getElementById("montoIncorrecto").style.display = "block";
-        return monto;
-    }else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
+    }
+    if(monto.value >1000) {
+        document.getElementById("montoIncorrecto").style.display = "none";
     }
 
 }
@@ -66,13 +56,18 @@ function calcularMostrarMonto() {
     let texto = `<p>Periodo 1* Monto INICIAL: ${monto.value} Monto final: ${montoFinal.toFixed(2)}</p> `;
     document.getElementById('cuadro').innerHTML = texto;
 }
+function invertir(){    
+    validarImputs();
+    validarDias(); 
+    calcularMostrarMonto();
+}
 function reinvertir(){
     validarImputs();
     validarDias(); 
     cont++;
     gananciaFinal = montoFinal+montoFinal*dias.value/360*porcentaje/100;
     let texto = `
-                <p>Periodo ${cont}* Monto INICIAL: ${montoFinal.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
+                <p>Periodo ${cont}* Monto INICIAL: ${total.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
     `;
     document.getElementById('cuadro').innerHTML = texto;
     montoFinal=gananciaFinal
