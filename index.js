@@ -7,7 +7,6 @@ let monto = document.getElementById('monto');
 let dias = document.getElementById('dias');
 let apellido =document.getElementById('apellido');
 let nombre =document.getElementById('nombre');
-
 function validarImputs(){
     if (nombre.value.trim() === "") {
         document.getElementById("nombreIncorrecto").style.display = "block";
