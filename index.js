@@ -1,73 +1,72 @@
-let montoFinal = 0;
-let gananciaFinal = 0;
-let cont = 1 ;
-let porcentaje = 0;
-let total = 0;
-let monto = document.getElementById('monto');
-let dias = document.getElementById('dias');
-let apellido =document.getElementById('apellido');
-let nombre =document.getElementById('nombre');
-function validarImputs(){
-    if (nombre.value.trim() === "") {
-        document.getElementById("nombreIncorrecto").style.display = "block";
-        return;
-    } else {
-        document.getElementById("nombreIncorrecto").style.display = "none";
+const app = Vue.createApp({
+    data (){
+        return{
+            nombre: '',
+            apellido: '',
+            dias: 0,
+            monto: '',
+            porcentaje: 0,
+            resultado: 0,
+            montoFinal: 0,
+            gananciaFinal: 0,
+            contador: 0,
+        }
+    },
+    methods:{
+        calcularMostrarMonto() {
+            this.validarDias;
+            this.montoFinal = this.monto+this.monto*this.dias/360*this.porcentaje/100;
+            return this.montoFinal;
+        },
+        invertir(){
+            let validarNombre  = this.validarNombre;
+            let validarApellido = this.validarApellido;
+            let validarMonto = this.validarMonto;
+            if(typeof validarNombre === 'string') {alert(validarNombre);}
+            else if(typeof validarApellido === 'string') {alert(validarApellido);}
+            else if(typeof validarMonto === 'string') {alert(validarMonto);}
+            else if (this.dias === 0) {alert("Seleccione un día");}
+            else {this.resultado = this.calcularMostrarMonto(); this.contador=1;}  
+        },
+        reinvertir(){  
+            if (this.contador === 1) {
+                this.validarDias;
+                this.gananciaFinal = this.resultado+this.resultado*this.dias/360*this.porcentaje/100;
+                this.resultado=this.gananciaFinal;
+                return this.gananciaFinal;
+            }        
+        },
+        borrarDatos(){
+            this.nombre = "";
+            this.apellido = "";
+            this.monto = '';
+            this.dias = 0; 
+            this.resultado = 0;
+            this.gananciaFinal = 0;
+        },
+    },
+    computed: {  
+        validarNombre(){
+            if (this.nombre.trim() === '') {return 'Debe ingresar un nombre valido';}
+            return true;
+        },
+        validarApellido(){
+            if (this.apellido.trim() === '') {return 'Debe ingresar un apellido valido';} 
+            return true;
+        },
+        validarMonto(){
+            if (this.monto === '') {return 'Debe ingresar un monto valido';}
+            else if (this.monto < 1000){return 'Debe ingresar un monto valido';}
+            else if (this.monto === 0){return 'Debe ingresar un monto valido';} 
+            return true;
+        },
+        validarDias(){
+            if (this.dias>=30 && this.dias<=60) {this.porcentaje=40;} 
+            else if (this.dias>61 && this.dias<=120) {this.porcentaje=45;}
+            else if (this.dias>=121 && this.dias<360) {this.porcentaje=50;}
+            else if (this.dias>=360) {this.porcentaje=65;} 
+            return this.porcentaje;
+        },
     }
-    if (apellido.value === "") {
-        document.getElementById("apellidoIncorrecto").style.display = "block";
-        return;
-    }else {
-        document.getElementById("apellidoIncorrecto").style.display = "none";
-    }
-    monto.value = parseFloat(monto.value);
-    if (isNaN(monto.value)) {
-        document.getElementById("montoIncorrecto").style.display = "block";
-    }else {
-        document.getElementById("montoIncorrecto").style.display = "none";
-    }
-    if (monto.value < 1000) {
-        document.getElementById("montoIncorrecto").style.display = "block";
-    }
-    if(monto.value >1000) {
-        document.getElementById("montoIncorrecto").style.display = "none";
-    }
-
-}
-function validarDias(){
-    if (dias.value>=30 && dias.value<=60) {
-        porcentaje=40;
-        return porcentaje;
-    } else if (dias.value>61 && dias.value<=120) {
-        porcentaje=45;
-        return porcentaje;
-    } else if (dias.value>=121 && dias.value<360) {
-        porcentaje=50;
-        return porcentaje;
-    } else if (dias.value>=360) {
-        porcentaje=65;
-        return porcentaje;
-    } 
-}
-function calcularMostrarMonto() {
-    total = monto.value = parseFloat(monto.value);
-    montoFinal = total+total*dias.value/360*porcentaje/100;
-    let texto = `<p>Periodo 1* Monto INICIAL: ${monto.value} Monto final: ${montoFinal.toFixed(2)}</p> `;
-    document.getElementById('cuadro').innerHTML = texto;
-}
-function invertir(){    
-    validarImputs();
-    validarDias(); 
-    calcularMostrarMonto();
-}
-function reinvertir(){
-    validarImputs();
-    validarDias(); 
-    cont++;
-    gananciaFinal = montoFinal+montoFinal*dias.value/360*porcentaje/100;
-    let texto = `
-                <p>Periodo ${cont}* Monto INICIAL: ${total.toFixed(2)} Monto final: ${gananciaFinal.toFixed(2)}</p>          
-    `;
-    document.getElementById('cuadro').innerHTML = texto;
-    montoFinal=gananciaFinal
-}
+});
+app.mount('#app');
